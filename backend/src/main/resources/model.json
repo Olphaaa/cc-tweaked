@@ -1,7 +1,42 @@
 {
   "site": {
-    "engine": {
-      
-    }
+    "name": "",
+    "engines": [
+      {
+        "name": "",
+        "resources": [
+
+        ]
+      }
+    ]
   }
 }
+
+User {
+  "Uuid": Uuid,
+}
+
+Site {
+  "Uuid":  Uuid,
+  "Name":  String,
+  "Owner": &User,
+    "Suppliers": [
+    &Supplier
+  ]
+}
+
+Supplier {
+  "Uuid": Uuid,
+  "Type": SupplierType,
+  "Location": Location,
+  "Output": long
+  "State": boolean
+}
+
+Location {
+  X,
+  Y,
+  Z,
+  World
+}
+

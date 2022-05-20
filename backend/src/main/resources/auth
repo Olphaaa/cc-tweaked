@@ -1,3 +1,3 @@
 user: "tweaked",
-pwd: "clientserver-cctweaked-mongodb",
+    pwd: "clientserver-cctweaked-mongodb",
 mongodb://tweaked@fingarde.sunei.fr:27017/?authMechanism=DEFAULT

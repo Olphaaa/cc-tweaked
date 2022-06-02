@@ -1,7 +1,10 @@
 package fr.iut.cctweaked.supplier;
 
+import fr.iut.cctweaked.config.SpringFoxConfig;
 import fr.iut.cctweaked.supplier.exceptions.SupplierException;
 import fr.iut.cctweaked.supplier.model.Supplier;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("supplier")
+@Api(tags = {SpringFoxConfig.SUPPLIER_TAG})
 public class SupplierController {
 
     private final SupplierService supplierService;

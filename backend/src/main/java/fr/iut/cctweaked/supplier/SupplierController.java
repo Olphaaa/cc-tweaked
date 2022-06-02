@@ -2,6 +2,7 @@ package fr.iut.cctweaked.supplier;
 
 import fr.iut.cctweaked.supplier.exceptions.SupplierException;
 import fr.iut.cctweaked.supplier.model.Supplier;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,22 +22,18 @@ public class SupplierController {
     @GetMapping
     public ResponseEntity<List<Supplier>> getSuppliers() {
         try {
-            List<Supplier> suppliers = supplierService.getSuppliers();
-            if (suppliers.isEmpty()) {
-                throw new SupplierException("No supplier found", HttpStatus.NOT_FOUND);
-            }
             return new ResponseEntity<>(supplierService.getSuppliers(), HttpStatus.OK);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SupplierException("Error while getting suppliers: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
     @GetMapping("/{uuid}")
     public ResponseEntity<Supplier> getSupplier(@PathVariable String uuid) {
         try {
-            return new ResponseEntity<>(supplierService.getSupplier(uuid), HttpStatus.OK);
+            return new ResponseEntity<>(supplierService.getSupplier(new ObjectId(uuid)), HttpStatus.OK);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SupplierException("Error while getting a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
@@ -45,25 +42,26 @@ public class SupplierController {
         try {
             return new ResponseEntity<>(supplierService.addSupplier(supplier), HttpStatus.OK);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SupplierException("Error while adding a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
-    @PutMapping
-    public ResponseEntity<Supplier> editSupplier() {
+    @PutMapping("/{uuid}")
+    public ResponseEntity<Supplier> editSupplier(@PathVariable String uuid) {
         try {
-            return new ResponseEntity<>(supplierService.editSupplier(), HttpStatus.OK);
+            return new ResponseEntity<>(supplierService.editSupplier(new ObjectId(uuid)), HttpStatus.OK);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SupplierException("Error while editing a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
-    @DeleteMapping
-    public ResponseEntity<Supplier> deleteSupplier() {
+    @DeleteMapping("/{uuid}")
+    public HttpStatus deleteSupplier(@PathVariable String uuid) {
         try {
-            return new ResponseEntity<>(supplierService.deleteSupplier(), HttpStatus.OK);
+            supplierService.deleteSupplier(new ObjectId(uuid));
+            return HttpStatus.OK;
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SupplierException("Error while deleting a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 }

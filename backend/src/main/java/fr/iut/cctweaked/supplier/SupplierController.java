@@ -1,5 +1,6 @@
 package fr.iut.cctweaked.supplier;
 
+import fr.iut.cctweaked.supplier.exceptions.SupplierException;
 import fr.iut.cctweaked.supplier.model.Supplier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,10 @@ public class SupplierController {
     @GetMapping
     public ResponseEntity<List<Supplier>> getSuppliers() {
         try {
+            List<Supplier> suppliers = supplierService.getSuppliers();
+            if (suppliers.isEmpty()) {
+                throw new SupplierException("No supplier found", HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<>(supplierService.getSuppliers(), HttpStatus.OK);
         } catch (Exception e) {
             throw new RuntimeException(e);

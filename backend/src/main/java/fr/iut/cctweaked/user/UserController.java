@@ -1,10 +1,10 @@
 package fr.iut.cctweaked.user;
 
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 
 
@@ -19,26 +19,24 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll(){
-        return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<UserDTO>> getAll(){
+        return new ResponseEntity<>(UserMapper.userListToUserDTOList(userService.getAll()), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") String id){
-        User user = userService.getById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        User user = userService.getById(new ObjectId(id));
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user){
-//        return userService.addUser(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<User> addUser(@RequestBody UserDTO userDTO){
+        return new ResponseEntity<>(userService.addUser(UserMapper.userDTOtoUser(userDTO)), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<User> updateUser(@RequestBody User user){
-//        return userService.updateUser(user);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<User> updateUser(@RequestBody UserDTO userDTO){
+        return new ResponseEntity<>(userService.updateUser(UserMapper.userDTOtoUser(userDTO)), HttpStatus.OK);
     }
     
 }

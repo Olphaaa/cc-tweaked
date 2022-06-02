@@ -5,17 +5,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@Document(collection = "Emp")
+@Document(collection = "users")
 public class User {
     private ObjectId _id;
-    private String uuid;
+    private String inGameId;
 
-    public User(String uuid) {
-        this.uuid = uuid;
+    public User(String inGameId) {
+        this.inGameId = inGameId;
+    }
+
+    public User update(User user) {
+        this.inGameId = user.inGameId;
+        return this;
     }
 }

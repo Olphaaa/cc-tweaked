@@ -3,8 +3,8 @@ package fr.iut.cctweaked.user;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
-import java.net.http.HttpResponse;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class UserService {
@@ -16,23 +16,25 @@ public class UserService {
     }
 
     public List<User> getAll() {
-        return null;
+        return userRepository.findAll();
     }
 
-    public void addUser(User user) {
-        userRepository.save(user);
+    public User addUser(User user) {
+        return userRepository.save(user);
     }
 
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
 
-    public void updateUser(User user) {
-        userRepository.save(user);
+    public User updateUser(User user) throws NoSuchElementException {
+        User existingUser = userRepository.findById(user.get_id()).orElseThrow();
+        return userRepository.save(existingUser.update(user));
+//        return userRepository.save(existingUser.update(user));
     }
 
-    public User getById(String id) {
-        return userRepository.findById(id).orElse(null);
+    public User getById(ObjectId id) throws NoSuchElementException {
+        return userRepository.findById(id).orElseThrow();
     }
 
 }

@@ -1,5 +1,6 @@
 package fr.iut.cctweaked.user;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

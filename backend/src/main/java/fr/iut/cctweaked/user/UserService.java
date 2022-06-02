@@ -1,5 +1,6 @@
 package fr.iut.cctweaked.user;
 
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 
 import java.net.http.HttpResponse;
@@ -14,11 +15,24 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public HttpResponse<List<User>> getAll() {
+    public List<User> getAll() {
         return null;
     }
 
     public void addUser(User user) {
         userRepository.save(user);
     }
+
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
+
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
+    public User getById(String id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
 }

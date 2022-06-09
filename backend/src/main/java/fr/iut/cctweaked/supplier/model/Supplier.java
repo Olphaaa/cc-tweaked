@@ -1,11 +1,10 @@
 package fr.iut.cctweaked.supplier.model;
 
-import fr.iut.cctweaked.model.Location;
+import fr.iut.cctweaked.storage.model.Location;
 import fr.iut.cctweaked.supplier.model.enums.SupplierType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 

@@ -1,7 +1,9 @@
-package fr.iut.cctweaked.storage;
+package fr.iut.cctweaked.service;
 
-import fr.iut.cctweaked.storage.model.Storage;
+import fr.iut.cctweaked.domain.Storage;
 
+import fr.iut.cctweaked.exception.StorageException;
+import fr.iut.cctweaked.repository.StorageRepository;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

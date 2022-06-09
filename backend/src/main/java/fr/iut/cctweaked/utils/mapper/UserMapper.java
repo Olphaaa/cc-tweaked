@@ -1,7 +1,7 @@
-package fr.iut.cctweaked.user;
+package fr.iut.cctweaked.utils.mapper;
 
-import fr.iut.cctweaked.user.model.User;
-import fr.iut.cctweaked.user.model.UserDTO;
+import fr.iut.cctweaked.domain.User;
+import fr.iut.cctweaked.dto.UserDTO;
 import org.bson.types.ObjectId;
 
 import java.util.List;

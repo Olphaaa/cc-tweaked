@@ -1,7 +1,8 @@
-package fr.iut.cctweaked.supplier;
+package fr.iut.cctweaked.service;
 
-import fr.iut.cctweaked.supplier.exceptions.SupplierException;
-import fr.iut.cctweaked.supplier.model.Supplier;
+import fr.iut.cctweaked.exception.SupplierException;
+import fr.iut.cctweaked.domain.Supplier;
+import fr.iut.cctweaked.repository.SupplierRepository;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

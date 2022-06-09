@@ -1,6 +1,8 @@
-package fr.iut.cctweaked.storage;
+package fr.iut.cctweaked.controller;
 
-import fr.iut.cctweaked.storage.model.Storage;
+import fr.iut.cctweaked.domain.Storage;
+import fr.iut.cctweaked.exception.StorageException;
+import fr.iut.cctweaked.service.StorageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package fr.iut.cctweaked.user.model;
+package fr.iut.cctweaked.domain;
 
 
 import lombok.Getter;

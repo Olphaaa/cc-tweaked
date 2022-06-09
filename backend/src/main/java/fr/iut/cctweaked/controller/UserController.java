@@ -1,7 +1,9 @@
-package fr.iut.cctweaked.user;
+package fr.iut.cctweaked.controller;
 
-import fr.iut.cctweaked.user.model.User;
-import fr.iut.cctweaked.user.model.UserDTO;
+import fr.iut.cctweaked.domain.User;
+import fr.iut.cctweaked.dto.UserDTO;
+import fr.iut.cctweaked.utils.mapper.UserMapper;
+import fr.iut.cctweaked.service.UserService;
 import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;

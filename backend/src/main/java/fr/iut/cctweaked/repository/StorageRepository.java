@@ -1,7 +1,6 @@
-package fr.iut.cctweaked.storage;
+package fr.iut.cctweaked.repository;
 
-import fr.iut.cctweaked.storage.model.Storage;
-import fr.iut.cctweaked.supplier.model.Supplier;
+import fr.iut.cctweaked.domain.Storage;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

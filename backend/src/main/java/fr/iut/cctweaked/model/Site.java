@@ -1,6 +1,6 @@
 package fr.iut.cctweaked.model;
 
-import fr.iut.cctweaked.supplier.model.Supplier;
+import fr.iut.cctweaked.domain.Supplier;
 import lombok.Getter;
 import org.bson.types.ObjectId;
 

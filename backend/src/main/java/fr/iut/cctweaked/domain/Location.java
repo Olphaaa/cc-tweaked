@@ -1,4 +1,4 @@
-package fr.iut.cctweaked.storage.model;
+package fr.iut.cctweaked.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,11 +9,11 @@ import org.springframework.data.annotation.Id;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Storage {
+public class Location {
     @Id
     private ObjectId _id;
-    private Integer capacity;
-    private IOPort input;
-    private IOPort output;
-    private Location location;
+    private Double x;
+    private Double y;
+    private Double z;
+    private String world;
 }

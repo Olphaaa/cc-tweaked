@@ -1,10 +1,10 @@
-package fr.iut.cctweaked.supplier;
+package fr.iut.cctweaked.controller;
 
 import fr.iut.cctweaked.config.SpringFoxConfig;
-import fr.iut.cctweaked.supplier.exceptions.SupplierException;
-import fr.iut.cctweaked.supplier.model.Supplier;
+import fr.iut.cctweaked.exception.SupplierException;
+import fr.iut.cctweaked.domain.Supplier;
+import fr.iut.cctweaked.service.SupplierService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

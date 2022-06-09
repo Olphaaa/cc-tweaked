@@ -1,6 +1,7 @@
 package fr.iut.cctweaked.user;
 
 import fr.iut.cctweaked.user.model.User;
+import fr.iut.cctweaked.user.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
 

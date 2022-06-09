@@ -1,4 +1,4 @@
-package fr.iut.cctweaked.user;
+package fr.iut.cctweaked.user.model;
 
 import java.io.Serializable;
 

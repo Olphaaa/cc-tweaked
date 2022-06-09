@@ -1,5 +1,7 @@
 package fr.iut.cctweaked.user;
 
+import fr.iut.cctweaked.user.model.User;
+import fr.iut.cctweaked.user.model.UserDTO;
 import org.bson.types.ObjectId;
 
 import java.util.List;

@@ -51,9 +51,9 @@ public class SupplierController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<Supplier> editSupplier(@PathVariable String uuid) {
+    public ResponseEntity<Supplier> editSupplier(@RequestBody Supplier supplier) {
         try {
-            return new ResponseEntity<>(supplierService.editSupplier(new ObjectId(uuid)), HttpStatus.OK);
+            return new ResponseEntity<>(supplierService.editSupplier(supplier), HttpStatus.OK);
         } catch (Exception e) {
             throw new SupplierException("Error while editing a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }

@@ -1,8 +1,13 @@
 package fr.iut.cctweaked.controller;
 
+import fr.iut.cctweaked.config.SpringFoxConfig;
 import fr.iut.cctweaked.domain.Storage;
+import fr.iut.cctweaked.dto.StorageDTO;
 import fr.iut.cctweaked.exception.StorageException;
 import fr.iut.cctweaked.service.StorageService;
+import fr.iut.cctweaked.utils.mapper.StorageMapper;
+import io.swagger.annotations.Api;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("storage")
+@Api(tags = {SpringFoxConfig.SUPPLIER_TAG})
 public class StorageController {
     private final StorageService storageService;
 
@@ -18,40 +25,40 @@ public class StorageController {
     }
 
     @GetMapping
-    private ResponseEntity<List<Storage>> getAll() {
+    private ResponseEntity<List<StorageDTO>> getAll() {
         try {
-            List<Storage> storages = storageService.getAll();
-            return new ResponseEntity<>(storages, HttpStatus.OK);
+            List<Storage> storages = storageService.getStorages();
+            return new ResponseEntity<>(StorageMapper.storageListToStorageDTOList(storages), HttpStatus.OK);
         } catch (Exception e) {
             throw new StorageException("Error while getting all storages", HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
     @GetMapping("/{:uuid}")
-    private ResponseEntity<Storage> getOne(@PathVariable String uuid) {
+    private ResponseEntity<StorageDTO> getOne(@PathVariable String uuid) {
         try {
-            Storage storage = storageService.getOne(uuid);
-            return new ResponseEntity<>(storage, HttpStatus.OK);
+            Storage storage = storageService.getStorage(new ObjectId(uuid));
+            return new ResponseEntity<>(StorageMapper.storageToStorageDTO(storage), HttpStatus.OK);
         } catch (Exception e) {
             throw new StorageException("Error while getting one storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
     @PostMapping
-    private ResponseEntity<Storage> addStorage(@RequestBody Storage storage) {
+    private ResponseEntity<StorageDTO> addStorage(@RequestBody Storage storage) {
         try {
-            Storage addedStorage = storageService.addStorage(storage);
-            return new ResponseEntity<>(addedStorage, HttpStatus.OK);
+            Storage addedStorage = storageService.addStorage((storage));
+            return new ResponseEntity<>(StorageMapper.storageToStorageDTO(addedStorage), HttpStatus.OK);
         } catch (Exception e) {
-            throw new StorageException("Error while adding a new storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new StorageException("Error while adding a new storage: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
     @PutMapping
-    private ResponseEntity<Storage> editStorage(@RequestBody Storage storage) {
+    private ResponseEntity<StorageDTO> editStorage(@RequestBody StorageDTO storage) {
         try {
-            Storage editedStorage = storageService.editStorage(storage);
-            return new ResponseEntity<>(editedStorage, HttpStatus.OK);
+            Storage editedStorage = storageService.editStorage(StorageMapper.storageDTOtoStorage(storage));
+            return new ResponseEntity<>(StorageMapper.storageToStorageDTO(editedStorage), HttpStatus.OK);
         } catch (Exception e) {
             throw new StorageException("Error while adding a new storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
@@ -60,12 +67,11 @@ public class StorageController {
     @DeleteMapping("/{:uuid}")
     private ResponseEntity<String> deleteStorage(@PathVariable String uuid) {
         try {
-            storageService.deleteStorage(uuid);
+            storageService.deleteStorage(new ObjectId(uuid));
             return new ResponseEntity<>("Storage deleted", HttpStatus.OK);
         } catch (Exception e) {
-            throw new StorageException("Excepiton while deleting Storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new StorageException("Exception while deleting Storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
-
     }
 
 }

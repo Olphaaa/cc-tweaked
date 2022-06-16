@@ -29,8 +29,8 @@ public class SupplierService {
         throw new SupplierException("The supplier is already existing", HttpStatus.NOT_FOUND);
     }
 
-    public Supplier editSupplier(ObjectId _id) {
-        Supplier supplierToEdit = getSupplier(_id);
+    public Supplier editSupplier(Supplier supplier) {
+        Supplier supplierToEdit = getSupplier(supplier.get_id());
         return supplierRepository.save(supplierToEdit);
     }
 

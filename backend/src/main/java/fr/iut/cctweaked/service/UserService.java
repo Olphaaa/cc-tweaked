@@ -25,17 +25,18 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public void deleteUser(User user) {
+    public void deleteUser(String id) {
+        User user = userRepository.findById(id).orElseThrow();
         userRepository.delete(user);
-    }
+     }
 
     public User updateUser(User user) throws NoSuchElementException {
         User existingUser = userRepository.findById(user.get_id()).orElseThrow();
-        return userRepository.save(existingUser.update(user));
-//        return userRepository.save(existingUser.update(user));
+        existingUser.setUsername(user.getUsername());
+        return userRepository.save(existingUser);
     }
 
-    public User getById(ObjectId id) throws NoSuchElementException {
+    public User getById(String id) throws NoSuchElementException {
         return userRepository.findById(id).orElseThrow();
     }
 

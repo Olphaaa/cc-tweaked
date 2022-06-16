@@ -3,6 +3,7 @@ package fr.iut.cctweaked.controller;
 import fr.iut.cctweaked.domain.Storage;
 import fr.iut.cctweaked.exception.StorageException;
 import fr.iut.cctweaked.service.StorageService;
+import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/storage")
 public class StorageController {
     private final StorageService storageService;
 
@@ -58,9 +60,9 @@ public class StorageController {
     }
 
     @DeleteMapping("/{:uuid}")
-    private ResponseEntity<String> deleteStorage(@PathVariable String uuid) {
+    private ResponseEntity<String> deleteStorage(@PathVariable String _id) {
         try {
-            storageService.deleteStorage(uuid);
+            storageService.deleteStorage(new ObjectId(_id));
             return new ResponseEntity<>("Storage deleted", HttpStatus.OK);
         } catch (Exception e) {
             throw new StorageException("Excepiton while deleting Storage", HttpStatus.INTERNAL_SERVER_ERROR, e);

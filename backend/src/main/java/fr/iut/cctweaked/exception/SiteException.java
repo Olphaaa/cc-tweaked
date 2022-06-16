@@ -1,4 +1,4 @@
-package fr.iut.cctweaked.site;
+package fr.iut.cctweaked.exception;
 
 import fr.iut.cctweaked.errors.Error;
 import org.springframework.http.HttpStatus;

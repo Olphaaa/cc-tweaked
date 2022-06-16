@@ -1,4 +1,4 @@
-package fr.iut.cctweaked.model.enums;
+package fr.iut.cctweaked.domain.enums;
 
 public enum IOPortState {
     ON, OFF

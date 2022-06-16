@@ -1,18 +1,18 @@
-package fr.iut.cctweaked.supplier.model;
+package fr.iut.cctweaked.domain;
 
-import fr.iut.cctweaked.model.Location;
-import fr.iut.cctweaked.supplier.model.enums.SupplierType;
+import fr.iut.cctweaked.domain.Location;
+import fr.iut.cctweaked.domain.enums.SupplierType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@RequiredArgsConstructor
 public class Supplier {
+    @Id
     private ObjectId _id;
     private SupplierType supplierType;
     private Location location;

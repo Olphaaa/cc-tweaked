@@ -24,6 +24,10 @@ public class StorageController {
         this.storageService = storageService;
     }
 
+    /**
+     * Get all storages
+     * @return List of storages
+     */
     @GetMapping
     private ResponseEntity<List<StorageDTO>> getAll() {
         try {
@@ -34,6 +38,11 @@ public class StorageController {
         }
     }
 
+    /**
+     * Get storage by id
+     * @param uuid Storage id
+     * @return Storage
+     */
     @GetMapping("/{:uuid}")
     private ResponseEntity<StorageDTO> getOne(@PathVariable String uuid) {
         try {
@@ -44,6 +53,11 @@ public class StorageController {
         }
     }
 
+    /**
+     * Add a storage
+     * @param storage Storage
+     * @return Storage
+     */
     @PostMapping
     private ResponseEntity<StorageDTO> addStorage(@RequestBody Storage storage) {
         try {
@@ -54,6 +68,11 @@ public class StorageController {
         }
     }
 
+    /**
+     * Edit a storage
+     * @param storage Storage to edit
+     * @return Edited storage
+     */
     @PutMapping
     private ResponseEntity<StorageDTO> editStorage(@RequestBody StorageDTO storage) {
         try {
@@ -64,6 +83,11 @@ public class StorageController {
         }
     }
 
+    /**
+     * Delete a storage
+     * @param uuid Storage id
+     * @return Deleted storage
+     */
     @DeleteMapping("/{:uuid}")
     private ResponseEntity<String> deleteStorage(@PathVariable String uuid) {
         try {

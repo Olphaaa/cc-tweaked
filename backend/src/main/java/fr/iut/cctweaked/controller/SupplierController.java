@@ -17,12 +17,17 @@ import java.util.List;
 @Api(tags = {SpringFoxConfig.SUPPLIER_TAG})
 public class SupplierController {
 
+
     private final SupplierService supplierService;
 
     public SupplierController(final SupplierService supplierService) {
         this.supplierService = supplierService;
     }
 
+    /**
+     * Get all suppliers
+     * @return List of suppliers
+     */
     @GetMapping
     public ResponseEntity<List<Supplier>> getSuppliers() {
         try {
@@ -32,6 +37,11 @@ public class SupplierController {
         }
     }
 
+    /**
+     * Get supplier by id
+     * @param uuid Supplier id
+     * @return Supplier
+     */
     @GetMapping("/{uuid}")
     public ResponseEntity<Supplier> getSupplier(@PathVariable String uuid) {
         try {
@@ -41,6 +51,11 @@ public class SupplierController {
         }
     }
 
+    /**
+     * Add a supplier
+     * @param supplier Supplier to add
+     * @return Added Supplier
+     */
     @PostMapping
     public ResponseEntity<Supplier> addSupplier(@RequestBody Supplier supplier) {
         try {
@@ -50,6 +65,11 @@ public class SupplierController {
         }
     }
 
+    /**
+     * Update a supplier
+     * @param supplier Supplier to update
+     * @return Edited supplier
+     */
     @PutMapping("/{uuid}")
     public ResponseEntity<Supplier> editSupplier(@RequestBody Supplier supplier) {
         try {
@@ -59,6 +79,11 @@ public class SupplierController {
         }
     }
 
+    /**
+     * Delete a supplier
+     * @param uuid Supplier id
+     * @return HttpStatus code
+     */
     @DeleteMapping("/{uuid}")
     public HttpStatus deleteSupplier(@PathVariable String uuid) {
         try {

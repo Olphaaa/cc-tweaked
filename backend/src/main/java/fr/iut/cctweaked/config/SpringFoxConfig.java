@@ -11,7 +11,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 @Configuration
 public class SpringFoxConfig {
     public static final String SUPPLIER_TAG = "Supplier endpoints documentation";
-    //todo add the user part (the tag (here) and the @Api in the userController class)
+    public static final String STORAGE_TAG = "Storage endpoints documentation";
+    // todo add the user part (the tag (here) and the @Api in the userController class)
     // todo and this for all controllers
     @Bean
     public Docket api() {
@@ -20,6 +21,7 @@ public class SpringFoxConfig {
                 .apis(RequestHandlerSelectors.basePackage("fr.iut.cctweaked"))
                 .paths(PathSelectors.any())
                 .build()
-                .tags(new Tag(SUPPLIER_TAG, "Supplier endpoints documentation"));
+                .tags(new Tag(SUPPLIER_TAG, "Supplier endpoints documentation"))
+                .tags(new Tag(STORAGE_TAG, "Storage endpoints documentation"));
     }
 }

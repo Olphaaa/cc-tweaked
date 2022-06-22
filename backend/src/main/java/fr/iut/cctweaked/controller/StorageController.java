@@ -85,10 +85,10 @@ public class StorageController {
 
     /**
      * Delete a storage
-     * @param uuid Storage id
+     * @param _id Storage id
      * @return Deleted storage
      */
-    @DeleteMapping("/{:uuid}")
+    @DeleteMapping("/{:_id}")
     private ResponseEntity<String> deleteStorage(@PathVariable String _id) {
         try {
             storageService.deleteStorage(new ObjectId(_id));

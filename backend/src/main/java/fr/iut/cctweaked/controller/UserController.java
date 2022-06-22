@@ -2,8 +2,8 @@ package fr.iut.cctweaked.controller;
 
 import fr.iut.cctweaked.domain.User;
 import fr.iut.cctweaked.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class    UserController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") String id){
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id){
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

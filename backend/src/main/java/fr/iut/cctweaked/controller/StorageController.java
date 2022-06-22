@@ -3,7 +3,7 @@ package fr.iut.cctweaked.controller;
 import fr.iut.cctweaked.config.SpringFoxConfig;
 import fr.iut.cctweaked.domain.Storage;
 import fr.iut.cctweaked.dto.StorageDTO;
-import fr.iut.cctweaked.exception.StorageException;
+import fr.iut.cctweaked.errors.Error;
 import fr.iut.cctweaked.service.StorageService;
 import fr.iut.cctweaked.utils.mapper.StorageMapper;
 import io.swagger.annotations.Api;
@@ -34,7 +34,8 @@ public class StorageController {
             List<Storage> storages = storageService.getStorages();
             return new ResponseEntity<>(StorageMapper.storageListToStorageDTOList(storages), HttpStatus.OK);
         } catch (Exception e) {
-            throw new StorageException("Error while getting all storages", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            // TODO: change Error to a custom error
+            throw new Error("Error while getting all storages", HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
@@ -49,7 +50,7 @@ public class StorageController {
             Storage storage = storageService.getStorage(new ObjectId(id));
             return new ResponseEntity<>(StorageMapper.storageToStorageDTO(storage), HttpStatus.OK);
         } catch (Exception e) {
-            throw new StorageException("Error while getting one storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Error while getting one storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
@@ -64,7 +65,7 @@ public class StorageController {
             Storage addedStorage = storageService.addStorage((storage));
             return new ResponseEntity<>(StorageMapper.storageToStorageDTO(addedStorage), HttpStatus.OK);
         } catch (Exception e) {
-            throw new StorageException("Error while adding a new storage: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Error while adding a new storage: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
@@ -79,7 +80,7 @@ public class StorageController {
             Storage editedStorage = storageService.editStorage(StorageMapper.storageDTOtoStorage(storage));
             return new ResponseEntity<>(StorageMapper.storageToStorageDTO(editedStorage), HttpStatus.OK);
         } catch (Exception e) {
-            throw new StorageException("Error while adding a new storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Error while adding a new storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 
@@ -94,7 +95,7 @@ public class StorageController {
             storageService.deleteStorage(new ObjectId(id));
             return new ResponseEntity<>("Storage deleted", HttpStatus.OK);
         } catch (Exception e) {
-            throw new StorageException("Exception while deleting Storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Exception while deleting Storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
     }
 

@@ -2,13 +2,10 @@ package fr.iut.cctweaked.service;
 
 
 import fr.iut.cctweaked.domain.Storage;
-import fr.iut.cctweaked.exception.StorageException;
 import fr.iut.cctweaked.repository.StorageRepository;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -64,6 +61,7 @@ public class StorageService {
 
     /**
      * Get storage by id
+     * TODO: Quelle CustomException utiliser pour la cas ou il y a eu une erreur lors du get ?
      * @param _id Storage id
      * @return Storage
      */
@@ -71,11 +69,4 @@ public class StorageService {
         return storageRepository.findById(_id).orElseThrow();
     }
 
-    public Storage getOne(String uuid) {
-        return null;
-    }
-
-    public List<Storage> getAll() {
-        return null;
-    }
 }

@@ -1,6 +1,7 @@
 package fr.iut.cctweaked.service;
 
-import fr.iut.cctweaked.exception.SupplierException;
+import fr.iut.cctweaked.exception.AlreadyExistingException;
+import fr.iut.cctweaked.exception.NotFoundException;
 import fr.iut.cctweaked.domain.Supplier;
 import fr.iut.cctweaked.repository.SupplierRepository;
 import org.bson.types.ObjectId;
@@ -22,7 +23,7 @@ public class SupplierService {
      * Get all suppliers
      * @return List of suppliers
      */
-    public List<Supplier> getSuppliers() {
+    public List<Supplier> getAll() {
         return supplierRepository.findAll();
     }
 
@@ -35,7 +36,7 @@ public class SupplierService {
         if (getSupplier(supplier.get_id()) == null) {
             return supplierRepository.save(supplier);
         }
-        throw new SupplierException("The supplier is already existing", HttpStatus.NOT_FOUND);
+        throw new AlreadyExistingException("The supplier is already existing", HttpStatus.CONFLICT);
     }
 
     /**
@@ -44,8 +45,7 @@ public class SupplierService {
      * @return Edited Supplier
      */
     public Supplier editSupplier(Supplier supplier) {
-        Supplier supplierToEdit = getSupplier(supplier.get_id());
-        return supplierRepository.save(supplierToEdit);
+        return supplierRepository.save(getSupplier(supplier.get_id()));
     }
 
     /**
@@ -55,7 +55,7 @@ public class SupplierService {
     public void deleteSupplier(ObjectId _id) {
         Supplier supplierToDelete = getSupplier(_id);
         if (supplierToDelete == null) {
-            throw new SupplierException("The wanted supplier doesn't exist", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("The supplier is not existing", HttpStatus.NOT_FOUND);
         }
         supplierRepository.delete(supplierToDelete);
     }

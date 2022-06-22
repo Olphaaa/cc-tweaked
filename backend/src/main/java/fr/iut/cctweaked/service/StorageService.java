@@ -1,13 +1,14 @@
 package fr.iut.cctweaked.service;
 
-import fr.iut.cctweaked.domain.Storage;
 
+import fr.iut.cctweaked.domain.Storage;
 import fr.iut.cctweaked.exception.StorageException;
 import fr.iut.cctweaked.repository.StorageRepository;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -68,5 +69,13 @@ public class StorageService {
      */
     public Storage getStorage(ObjectId _id) {
         return storageRepository.findById(_id).orElseThrow();
+    }
+
+    public Storage getOne(String uuid) {
+        return null;
+    }
+
+    public List<Storage> getAll() {
+        return null;
     }
 }

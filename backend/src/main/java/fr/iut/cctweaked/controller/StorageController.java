@@ -89,9 +89,9 @@ public class StorageController {
      * @return Deleted storage
      */
     @DeleteMapping("/{:uuid}")
-    private ResponseEntity<String> deleteStorage(@PathVariable String uuid) {
+    private ResponseEntity<String> deleteStorage(@PathVariable String _id) {
         try {
-            storageService.deleteStorage(new ObjectId(uuid));
+            storageService.deleteStorage(new ObjectId(_id));
             return new ResponseEntity<>("Storage deleted", HttpStatus.OK);
         } catch (Exception e) {
             throw new StorageException("Exception while deleting Storage", HttpStatus.INTERNAL_SERVER_ERROR, e);

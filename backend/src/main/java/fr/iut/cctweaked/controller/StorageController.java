@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("storage")
-@Api(tags = {SpringFoxConfig.SUPPLIER_TAG})
+@Api(tags = {SpringFoxConfig.STORAGE_TAG})
 public class StorageController {
     private final StorageService storageService;
 
@@ -40,13 +40,13 @@ public class StorageController {
 
     /**
      * Get storage by id
-     * @param uuid Storage id
+     * @param id Storage id
      * @return Storage
      */
-    @GetMapping("/{:uuid}")
-    private ResponseEntity<StorageDTO> getOne(@PathVariable String uuid) {
+    @GetMapping("/{id}")
+    private ResponseEntity<StorageDTO> getOne(@PathVariable String id) {
         try {
-            Storage storage = storageService.getStorage(new ObjectId(uuid));
+            Storage storage = storageService.getStorage(new ObjectId(id));
             return new ResponseEntity<>(StorageMapper.storageToStorageDTO(storage), HttpStatus.OK);
         } catch (Exception e) {
             throw new StorageException("Error while getting one storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
@@ -85,13 +85,13 @@ public class StorageController {
 
     /**
      * Delete a storage
-     * @param _id Storage id
+     * @param id Storage id
      * @return Deleted storage
      */
-    @DeleteMapping("/{:_id}")
-    private ResponseEntity<String> deleteStorage(@PathVariable String _id) {
+    @DeleteMapping("/{id}")
+    private ResponseEntity<String> deleteStorage(@PathVariable String id) {
         try {
-            storageService.deleteStorage(new ObjectId(_id));
+            storageService.deleteStorage(new ObjectId(id));
             return new ResponseEntity<>("Storage deleted", HttpStatus.OK);
         } catch (Exception e) {
             throw new StorageException("Exception while deleting Storage", HttpStatus.INTERNAL_SERVER_ERROR, e);

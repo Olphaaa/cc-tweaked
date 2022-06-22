@@ -10,10 +10,11 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SpringFoxConfig {
-    public static final String SUPPLIER_TAG = "Supplier endpoints documentation";
-    public static final String STORAGE_TAG = "Storage endpoints documentation";
-    // todo add the user part (the tag (here) and the @Api in the userController class)
-    // todo and this for all controllers
+    public static final String SUPPLIER_TAG = "Supplier endpoints";
+    public static final String STORAGE_TAG = "Storage endpoints";
+    public static final String SITE_TAG = "Site endpoints";
+    public static final String USER_TAG = "User endpoints";
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
@@ -22,6 +23,8 @@ public class SpringFoxConfig {
                 .paths(PathSelectors.any())
                 .build()
                 .tags(new Tag(SUPPLIER_TAG, "Supplier endpoints documentation"))
-                .tags(new Tag(STORAGE_TAG, "Storage endpoints documentation"));
+                .tags(new Tag(STORAGE_TAG, "Storage endpoints documentation"))
+                .tags(new Tag(SITE_TAG, "Site endpoints documentation"))
+                .tags(new Tag(USER_TAG, "User endpoints documentation"));
     }
 }

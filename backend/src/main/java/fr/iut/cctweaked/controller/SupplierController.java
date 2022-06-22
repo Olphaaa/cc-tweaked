@@ -39,13 +39,13 @@ public class SupplierController {
 
     /**
      * Get supplier by id
-     * @param uuid Supplier id
+     * @param id Supplier id
      * @return Supplier
      */
-    @GetMapping("/{uuid}")
-    public ResponseEntity<Supplier> getSupplier(@PathVariable String uuid) {
+    @GetMapping("/{id}")
+    public ResponseEntity<Supplier> getSupplier(@PathVariable String id) {
         try {
-            return new ResponseEntity<>(supplierService.getSupplier(new ObjectId(uuid)), HttpStatus.OK);
+            return new ResponseEntity<>(supplierService.getSupplier(new ObjectId(id)), HttpStatus.OK);
         } catch (Exception e) {
             throw new SupplierException("Error while getting a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
         }
@@ -70,7 +70,7 @@ public class SupplierController {
      * @param supplier Supplier to update
      * @return Edited supplier
      */
-    @PutMapping("/{uuid}")
+    @PutMapping
     public ResponseEntity<Supplier> editSupplier(@RequestBody Supplier supplier) {
         try {
             return new ResponseEntity<>(supplierService.editSupplier(supplier), HttpStatus.OK);
@@ -81,13 +81,13 @@ public class SupplierController {
 
     /**
      * Delete a supplier
-     * @param uuid Supplier id
+     * @param id Supplier id
      * @return HttpStatus code
      */
-    @DeleteMapping("/{uuid}")
-    public HttpStatus deleteSupplier(@PathVariable String uuid) {
+    @DeleteMapping("/{id}")
+    public HttpStatus deleteSupplier(@PathVariable String id) {
         try {
-            supplierService.deleteSupplier(new ObjectId(uuid));
+            supplierService.deleteSupplier(new ObjectId(id));
             return HttpStatus.OK;
         } catch (Exception e) {
             throw new SupplierException("Error while deleting a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);

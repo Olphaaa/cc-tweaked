@@ -1,8 +1,11 @@
 package fr.iut.cctweaked.service;
 
 import fr.iut.cctweaked.domain.User;
+import fr.iut.cctweaked.dto.UsersSuppliersAndStorages;
+import fr.iut.cctweaked.repository.SiteRepository;
 import fr.iut.cctweaked.repository.UserRepository;
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +15,11 @@ import java.util.NoSuchElementException;
 public class UserService {
 
     private final UserRepository userRepository;
+    private SiteRepository siteRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, SiteRepository siteRepository) {
         this.userRepository = userRepository;
+        this.siteRepository = siteRepository;
     }
 
     /**
@@ -65,4 +70,25 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
+    public UsersSuppliersAndStorages getSuppliersAndStorages(String id) {
+        try {
+            List<Object> usersSuppliersAndStorages = siteRepository.findSuppliersAndStorages(id).getMappedResults();
+            System.out.println(usersSuppliersAndStorages);
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public List<String> getUsersSites(String id) {
+        try {
+            List<Object> truc = siteRepository.findUsersSites(id).getMappedResults();
+            System.out.println(truc);
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

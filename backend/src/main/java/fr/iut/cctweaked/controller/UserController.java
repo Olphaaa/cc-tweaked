@@ -22,27 +22,51 @@ public class    UserController {
         this.userService = userService;
     }
 
+    /**
+     * Get all users
+     * @return List of users
+     */
     @GetMapping
     public ResponseEntity<List<User>> getAll(){
         return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
     }
 
+    /**
+     * Get a user by id
+     * @param id User id
+     * @return User
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") String id){
         User user = userService.getById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    /**
+     * Add a user
+     * @param user User to add
+     * @return Add user
+     */
     @PostMapping
     public ResponseEntity<User> addUser(@RequestBody User user){
         return new ResponseEntity<>(userService.addUser(user), HttpStatus.CREATED);
     }
 
+    /**
+     * Edit a user
+     * @param user User to edit
+     * @return Edited user
+     */
     @PutMapping
     public ResponseEntity<User> updateUser(@RequestBody User user){
         return new ResponseEntity<>(userService.updateUser(user), HttpStatus.OK);
     }
 
+    /**
+     * Delete a user
+     * @param id User id
+     * @return Deleted user
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") String id){
         userService.deleteUser(id);

@@ -23,29 +23,53 @@ public class SiteController {
         this.siteService = siteService;
     }
 
+    /**
+     * Get all sites
+     * @return List of sites
+     */
     @GetMapping
     public ResponseEntity<List<Site>> getAll(){
         return new ResponseEntity<>(siteService.getAll(), HttpStatus.OK);
     }
 
+    /**
+     * Get a site by id
+     * @param id Site id
+     * @return Site
+     */
     @GetMapping("/{id}")
     public ResponseEntity<Site> getById(@PathVariable("id") String id){
         Site site = siteService.getById(new ObjectId(id));
         return new ResponseEntity<>(site, HttpStatus.OK);
     }
 
+    /**
+     * Add a site
+     * @param siteDTO Site
+     * @return Added site
+     */
     @PostMapping
     public ResponseEntity<SiteDTO> addSite(@RequestBody SiteDTO siteDTO){
         Site site = siteService.addSite(SiteMapper.siteDTOtoSite(siteDTO));
         return new ResponseEntity<>(SiteMapper.siteToSiteDTO(site), HttpStatus.OK);
     }
 
+    /**
+     * Edit a site
+     * @param site Site to edit
+     * @return Edited site
+     */
     @PutMapping
     public ResponseEntity<SiteDTO> updateSite(@RequestBody Site site){
         Site updatedSite = siteService.updateSite(site);
         return new ResponseEntity<>(SiteMapper.siteToSiteDTO(updatedSite), HttpStatus.OK);
     }
 
+    /**
+     * Delete a site
+     * @param id Site id
+     * @return Deleted site
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteSite(@PathVariable("id") String id){
         siteService.deleteSite(new ObjectId(id));

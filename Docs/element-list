@@ -1,0 +1,12 @@
+fr.iut.cctweaked
+fr.iut.cctweaked.config
+fr.iut.cctweaked.controller
+fr.iut.cctweaked.controller.advice
+fr.iut.cctweaked.domain
+fr.iut.cctweaked.domain.enums
+fr.iut.cctweaked.dto
+fr.iut.cctweaked.errors
+fr.iut.cctweaked.exception
+fr.iut.cctweaked.repository
+fr.iut.cctweaked.service
+fr.iut.cctweaked.utils.mapper

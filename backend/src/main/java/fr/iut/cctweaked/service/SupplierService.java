@@ -1,6 +1,7 @@
 package fr.iut.cctweaked.service;
 
-import fr.iut.cctweaked.exception.SupplierException;
+import fr.iut.cctweaked.exception.AlreadyExistingException;
+import fr.iut.cctweaked.exception.NotFoundException;
 import fr.iut.cctweaked.domain.Supplier;
 import fr.iut.cctweaked.repository.SupplierRepository;
 import org.bson.types.ObjectId;
@@ -18,30 +19,52 @@ public class SupplierService {
         this.supplierRepository = supplierRepository;
     }
 
-    public List<Supplier> getSuppliers() {
+    /**
+     * Get all suppliers
+     * @return List of suppliers
+     */
+    public List<Supplier> getAll() {
         return supplierRepository.findAll();
     }
 
+    /**
+     * Add a supplier
+     * @param supplier Supplier to add
+     * @return Added Supplier
+     */
     public Supplier addSupplier(Supplier supplier) {
         if (getSupplier(supplier.get_id()) == null) {
             return supplierRepository.save(supplier);
         }
-        throw new SupplierException("The supplier is already existing", HttpStatus.NOT_FOUND);
+        throw new AlreadyExistingException("The supplier is already existing", HttpStatus.CONFLICT);
     }
 
-    public Supplier editSupplier(ObjectId _id) {
-        Supplier supplierToEdit = getSupplier(_id);
-        return supplierRepository.save(supplierToEdit);
+    /**
+     * Edit a supplier
+     * @param supplier Supplier to edit
+     * @return Edited Supplier
+     */
+    public Supplier editSupplier(Supplier supplier) {
+        return supplierRepository.save(getSupplier(supplier.get_id()));
     }
 
+    /**
+     * Delete a supplier
+     * @param _id Supplier id
+     */
     public void deleteSupplier(ObjectId _id) {
         Supplier supplierToDelete = getSupplier(_id);
         if (supplierToDelete == null) {
-            throw new SupplierException("The wanted supplier doesn't exist", HttpStatus.NOT_FOUND);
+            throw new NotFoundException("The supplier is not existing", HttpStatus.NOT_FOUND);
         }
         supplierRepository.delete(supplierToDelete);
     }
 
+    /**
+     * Get a supplier by id
+     * @param _id Supplier id
+     * @return Supplier
+     */
     public Supplier getSupplier(ObjectId _id) {
         return supplierRepository.findBy_id(_id);
     }

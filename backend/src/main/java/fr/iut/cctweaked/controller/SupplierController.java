@@ -1,9 +1,10 @@
 package fr.iut.cctweaked.controller;
 
 import fr.iut.cctweaked.config.SpringFoxConfig;
-import fr.iut.cctweaked.exception.SupplierException;
+import fr.iut.cctweaked.dto.SupplierDTO;
 import fr.iut.cctweaked.domain.Supplier;
 import fr.iut.cctweaked.service.SupplierService;
+import fr.iut.cctweaked.utils.mapper.SupplierMapper;
 import io.swagger.annotations.Api;
 import org.bson.types.ObjectId;
 import org.springframework.http.HttpStatus;
@@ -23,49 +24,53 @@ public class SupplierController {
         this.supplierService = supplierService;
     }
 
+    /**
+     * Get all suppliers
+     * @return List of suppliers
+     */
     @GetMapping
-    public ResponseEntity<List<Supplier>> getSuppliers() {
-        try {
-            return new ResponseEntity<>(supplierService.getSuppliers(), HttpStatus.OK);
-        } catch (Exception e) {
-            throw new SupplierException("Error while getting suppliers: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
-        }
+    public ResponseEntity<List<SupplierDTO>> getSuppliers() {
+        return new ResponseEntity<>(SupplierMapper.supplierListToSupplierDTOList(supplierService.getAll()), HttpStatus.OK);
     }
 
-    @GetMapping("/{uuid}")
-    public ResponseEntity<Supplier> getSupplier(@PathVariable String uuid) {
-        try {
-            return new ResponseEntity<>(supplierService.getSupplier(new ObjectId(uuid)), HttpStatus.OK);
-        } catch (Exception e) {
-            throw new SupplierException("Error while getting a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
-        }
+    /**
+     * Get supplier by id
+     * @param id Supplier id
+     * @return Supplier
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<SupplierDTO> getSupplier(@PathVariable String id) {
+        return new ResponseEntity<>(SupplierMapper.supplierToSupplierDTO(supplierService.getSupplier(new ObjectId(id))), HttpStatus.OK);
     }
 
+    /**
+     * Add a supplier
+     * @param supplier Supplier to add
+     * @return Added Supplier
+     */
     @PostMapping
-    public ResponseEntity<Supplier> addSupplier(@RequestBody Supplier supplier) {
-        try {
-            return new ResponseEntity<>(supplierService.addSupplier(supplier), HttpStatus.OK);
-        } catch (Exception e) {
-            throw new SupplierException("Error while adding a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
-        }
+    public ResponseEntity<SupplierDTO> addSupplier(@RequestBody SupplierDTO supplier) {
+        return new ResponseEntity<>(SupplierMapper.supplierToSupplierDTO(supplierService.addSupplier(SupplierMapper.supplierDTOToSupplier(supplier))), HttpStatus.OK);
     }
 
-    @PutMapping("/{uuid}")
-    public ResponseEntity<Supplier> editSupplier(@PathVariable String uuid) {
-        try {
-            return new ResponseEntity<>(supplierService.editSupplier(new ObjectId(uuid)), HttpStatus.OK);
-        } catch (Exception e) {
-            throw new SupplierException("Error while editing a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
-        }
+    /**
+     * Update a supplier
+     * @param supplier Supplier to update
+     * @return Edited supplier
+     */
+    @PutMapping
+    public ResponseEntity<SupplierDTO> editSupplier(@RequestBody Supplier supplier) {
+        return new ResponseEntity<>(SupplierMapper.supplierToSupplierDTO(supplierService.editSupplier(supplier)), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{uuid}")
-    public HttpStatus deleteSupplier(@PathVariable String uuid) {
-        try {
-            supplierService.deleteSupplier(new ObjectId(uuid));
-            return HttpStatus.OK;
-        } catch (Exception e) {
-            throw new SupplierException("Error while deleting a supplier: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
-        }
+    /**
+     * Delete a supplier
+     * @param id Supplier id
+     * @return HttpStatus code
+     */
+    @DeleteMapping("/{id}")
+    public HttpStatus deleteSupplier(@PathVariable String id) {
+        supplierService.deleteSupplier(new ObjectId(id));
+        return HttpStatus.OK;
     }
 }

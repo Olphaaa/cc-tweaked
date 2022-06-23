@@ -16,6 +16,5 @@ public class ErrorAdvice {
     public String handleNotFoundException(NotFoundException e){
          return e.getMessage();
     }
-    
-    
+
 }

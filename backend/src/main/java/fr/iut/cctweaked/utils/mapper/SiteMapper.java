@@ -12,35 +12,37 @@ import java.util.List;
 
 public class SiteMapper {
     public static Site siteDTOtoSite(SiteDTO siteDTO) {
-        Site site = new Site();
-        if (siteDTO.get_id() != null) {
-            site.set_id(new ObjectId(siteDTO.get_id()));
-        }
-        List<Supplier> suppliers = SupplierMapper.supplierDTOsToSuppliers(siteDTO.getSupplierDTOs());
-        List<Storage> storages = StorageMapper.storageDTOsToStorages(siteDTO.getStorageDTOs());
-
-        site.setName(siteDTO.getName())
-                .setOwner(siteDTO.getOwner())
-                .setSuppliers(suppliers)
-                .setStorages(storages);
-
-        return site;
+//        Site site = new Site();
+//        if (siteDTO.get_id() != null) {
+//            site.set_id(new ObjectId(siteDTO.get_id()));
+//        }
+//        List<Supplier> suppliers = SupplierMapper.supplierDTOsToSuppliers(siteDTO.getSupplierDTOs());
+//
+//        site.setName(siteDTO.getName())
+//                .setOwner(siteDTO.getOwner())
+//                .setSuppliers(suppliers)
+//                .setStorages(storages);
+//
+//        return site;
+        return null;
     }
 
     public static SiteDTO siteToSiteDTO(Site site) {
-        SiteDTO siteDTO = new SiteDTO();
-        siteDTO.set_id(site.get_id().toString())
-                .setName(site.getName())
-                .setOwner(site.getOwner())
-                .setSupplierDTOs(SupplierMapper.suppliersToSupplierDTOs(site.getSuppliers()))
-                .setStorageDTOs(StorageMapper.storagesToStorageDTOs(site.getStorages()));
-
-        return siteDTO;
+//        SiteDTO siteDTO = new SiteDTO();
+//        siteDTO.set_id(site.get_id().toString())
+//                .setName(site.getName())
+//                .setOwner(site.getOwner())
+//                .setSupplierDTOs(SupplierMapper.suppliersToSupplierDTOs(site.getSuppliers()))
+//                .setStorageDTOs(StorageMapper.storagesToStorageDTOs(site.getStorages()));
+//
+//        return siteDTO;
+        return null;
     }
 
     public static List<SiteDTO> siteListToSiteDTOList(List<Site> siteList) {
-        List<SiteDTO> siteDTOList = new java.util.ArrayList<>();
-        siteList.forEach(site -> siteDTOList.add(siteToSiteDTO(site)));
-        return siteDTOList;
+//        List<SiteDTO> siteDTOList = new java.util.ArrayList<>();
+//        siteList.forEach(site -> siteDTOList.add(siteToSiteDTO(site)));
+//        return siteDTOList;
+        return null;
     }
 }

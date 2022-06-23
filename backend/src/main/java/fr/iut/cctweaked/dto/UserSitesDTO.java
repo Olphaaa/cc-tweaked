@@ -1,7 +1,6 @@
 package fr.iut.cctweaked.dto;
 
-import fr.iut.cctweaked.domain.Storage;
-import fr.iut.cctweaked.domain.Supplier;
+import fr.iut.cctweaked.domain.Site;
 import fr.iut.cctweaked.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +13,7 @@ import java.util.List;
 @Setter
 @Accessors(chain = true)
 @NoArgsConstructor
-public class SiteDTO {
-    private String _id;
-    private String name;
+public class UserSitesDTO {
     private User owner;
-    private List<SupplierDTO> suppliers;
-    private List<StorageDTO> storages;
+    private List<SiteDTO> sites;
 }

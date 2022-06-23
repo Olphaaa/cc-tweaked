@@ -1,12 +1,15 @@
 package fr.iut.cctweaked.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
-@Getter
+@Data
+@Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Location {

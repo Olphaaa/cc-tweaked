@@ -22,8 +22,8 @@ public class SiteMapper {
         if (siteDTO.get_id() != null) {
             site.set_id(new ObjectId(siteDTO.get_id()));
         }
-        List<Supplier> suppliers = SupplierMapper.supplierDTOListToSupplierList(siteDTO.getSupplierDTOs());
-        List<Storage> storages = StorageMapper.storageDTOListToStorageList(siteDTO.getStorageDTOs());
+        List<Supplier> suppliers = SupplierMapper.supplierDTOListToSupplierList(siteDTO.getSuppliers());
+        List<Storage> storages = StorageMapper.storageDTOListToStorageList(siteDTO.getStorages());
         site.setName(siteDTO.getName())
                 .setOwner(siteDTO.getOwner())
                 .setSuppliers(suppliers)
@@ -42,8 +42,8 @@ public class SiteMapper {
         siteDTO.set_id(site.get_id().toString())
                 .setName(site.getName())
                 .setOwner(site.getOwner())
-                .setSupplierDTOs(SupplierMapper.supplierListToSupplierDTOList(site.getSuppliers()))
-                .setStorageDTOs(StorageMapper.storageListToStorageDTOList(site.getStorages()));
+                .setSuppliers(SupplierMapper.supplierListToSupplierDTOList(site.getSuppliers()))
+                .setStorages(StorageMapper.storageListToStorageDTOList(site.getStorages()));
 
         return siteDTO;
     }

@@ -1,6 +1,7 @@
 package fr.iut.cctweaked.domain;
 
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,8 +9,7 @@ import lombok.experimental.Accessors;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 @NoArgsConstructor
 @Document(collection = "users")

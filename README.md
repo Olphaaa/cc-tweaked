@@ -44,8 +44,7 @@ Les controllers peuvent toute faire les méthode du CRUD, c'est a dire, pour cha
 |      |      |      |
 
 ## Diagramme MCD
-![Diagramme de classes](./controllers_brief.svg)
-<img src="./controllers_brief.svg">
+![Diagramme de classes](./mcd.svg)
 
 ## Diagramme de classes
 

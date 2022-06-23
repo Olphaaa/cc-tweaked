@@ -33,10 +33,8 @@ public class SupplierService {
      * @return Added Supplier
      */
     public Supplier addSupplier(Supplier supplier) {
-        if (getSupplier(supplier.get_id()) == null) {
-            return supplierRepository.save(supplier);
-        }
-        throw new AlreadyExistingException("The supplier is already existing", HttpStatus.CONFLICT);
+        supplierRepository.findById(supplier.get_id()).orElseThrow(() -> new AlreadyExistingException("Supplier already exists"));
+        return supplierRepository.save(supplier);
     }
 
     /**
@@ -53,10 +51,7 @@ public class SupplierService {
      * @param _id Supplier id
      */
     public void deleteSupplier(ObjectId _id) {
-        Supplier supplierToDelete = getSupplier(_id);
-        if (supplierToDelete == null) {
-            throw new NotFoundException("The supplier is not existing", HttpStatus.NOT_FOUND);
-        }
+        Supplier supplierToDelete = supplierRepository.findById(_id).orElseThrow(() -> new NotFoundException("The supplier is not existing"));
         supplierRepository.delete(supplierToDelete);
     }
 
@@ -66,6 +61,6 @@ public class SupplierService {
      * @return Supplier
      */
     public Supplier getSupplier(ObjectId _id) {
-        return supplierRepository.findBy_id(_id);
+        return supplierRepository.findById(_id).orElseThrow(() -> new NotFoundException("The supplier is not existing"));
     }
 }

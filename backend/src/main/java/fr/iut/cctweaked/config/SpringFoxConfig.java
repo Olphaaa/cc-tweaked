@@ -15,6 +15,10 @@ public class SpringFoxConfig {
     public static final String SITE_TAG = "Site endpoints";
     public static final String USER_TAG = "User endpoints";
 
+    /**
+     * Create a docket with the specified documentation type.
+     * @return Docket
+     */
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)

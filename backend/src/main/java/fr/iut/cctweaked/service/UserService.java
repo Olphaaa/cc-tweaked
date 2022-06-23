@@ -17,25 +17,50 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Get all users
+     * @return List of users
+     */
     public List<User> getAll() {
         return userRepository.findAll();
     }
 
+    /**
+     * Add a user
+     * @param user User to add
+     * @return Added user
+     */
     public User addUser(User user) {
         return userRepository.save(user);
     }
 
+
+    /**
+     * Delete a user
+     * @param id User id
+     */
     public void deleteUser(String id) {
         User user = userRepository.findById(id).orElseThrow();
         userRepository.delete(user);
      }
 
+    /**
+     * Edit a user
+     * @param user User to edit
+     * @return Edited user
+     * @throws NoSuchElementException if user not found
+     */
     public User updateUser(User user) throws NoSuchElementException {
         User existingUser = userRepository.findById(user.get_id()).orElseThrow();
         existingUser.setUsername(user.getUsername());
         return userRepository.save(existingUser);
     }
 
+    /**
+     * Get a user by id
+     * @param id User id
+     * @throws NoSuchElementException if user not found
+     */
     public User getById(String id) throws NoSuchElementException {
         return userRepository.findById(id).orElseThrow();
     }

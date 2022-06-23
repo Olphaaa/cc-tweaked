@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 
 public class AlreadyExistingException extends Error{
 
-
     public AlreadyExistingException(String message) {
         super(message);
     }

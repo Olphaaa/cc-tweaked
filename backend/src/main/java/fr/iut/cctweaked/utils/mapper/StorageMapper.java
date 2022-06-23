@@ -7,6 +7,12 @@ import org.bson.types.ObjectId;
 import java.util.List;
 
 public class StorageMapper {
+
+    /**
+     * Convert a storage to a storageDTO
+     * @param storageDTO Storage to convert
+     * @return StorageDTO
+     */
     public static Storage storageDTOtoStorage(StorageDTO storageDTO) {
         Storage storage = new Storage();
         if (storageDTO.get_id() != null) {
@@ -19,6 +25,11 @@ public class StorageMapper {
         return storage;
     }
 
+    /**
+     * Convert a storage to a storageDTO
+     * @param storage Storage to convert
+     * @return StorageDTO
+     */
     public static StorageDTO storageToStorageDTO(Storage storage) {
         StorageDTO storageDTO = new StorageDTO();
         storageDTO.set_id(storage.get_id().toString())
@@ -29,6 +40,11 @@ public class StorageMapper {
         return storageDTO;
     }
 
+    /**
+     * Convert a list of storages to a list of storageDTO
+     * @param storageList List of storages to convert
+     * @return List of storageDTO
+     */
     public static List<StorageDTO> storageListToStorageDTOList(List<Storage> storageList) {
         List<StorageDTO> storageDTOList = new java.util.ArrayList<>();
         for (Storage storage : storageList) {

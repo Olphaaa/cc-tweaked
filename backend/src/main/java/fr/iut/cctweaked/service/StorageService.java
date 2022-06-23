@@ -2,6 +2,7 @@ package fr.iut.cctweaked.service;
 
 
 import fr.iut.cctweaked.domain.Storage;
+import fr.iut.cctweaked.exception.NotFoundException;
 import fr.iut.cctweaked.repository.StorageRepository;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -24,6 +25,7 @@ public class StorageService {
 
     /**
      * Get all storages
+     *
      * @return List of storages
      */
     public List<Storage> getStorages() {
@@ -54,19 +56,17 @@ public class StorageService {
      * @param _id Storage id
      */
     public void deleteStorage(ObjectId _id) {
-        Storage storageToDelete = storageRepository.findById(_id).orElseThrow();
-
+        Storage storageToDelete = storageRepository.findById(_id).orElseThrow(() -> new NotFoundException("Storage not found"));
         storageRepository.delete(storageToDelete);
     }
 
     /**
      * Get storage by id
-     * TODO: Quelle CustomException utiliser pour la cas ou il y a eu une erreur lors du get ?
      * @param _id Storage id
      * @return Storage
      */
     public Storage getStorage(ObjectId _id) {
-        return storageRepository.findById(_id).orElseThrow();
+        return storageRepository.findById(_id).orElseThrow(() -> new NotFoundException("The storage is not existing"));
     }
 
 }

@@ -30,13 +30,7 @@ public class StorageController {
      */
     @GetMapping
     private ResponseEntity<List<StorageDTO>> getAll() {
-        try {
-            List<Storage> storages = storageService.getStorages();
-            return new ResponseEntity<>(StorageMapper.storageListToStorageDTOList(storages), HttpStatus.OK);
-        } catch (Exception e) {
-            // TODO: change Error to a custom error
-            throw new Error("Error while getting all storages", e);
-        }
+        return new ResponseEntity<>(StorageMapper.storageListToStorageDTOList(storageService.getStorages()), HttpStatus.OK);
     }
 
     /**
@@ -46,12 +40,7 @@ public class StorageController {
      */
     @GetMapping("/{id}")
     private ResponseEntity<StorageDTO> getOne(@PathVariable String id) {
-        try {
-            Storage storage = storageService.getStorage(new ObjectId(id));
-            return new ResponseEntity<>(StorageMapper.storageToStorageDTO(storage), HttpStatus.OK);
-        } catch (Exception e) {
-            throw new Error("Error while getting one storage", e);
-        }
+        return new ResponseEntity<>(StorageMapper.storageToStorageDTO(storageService.getStorage(new ObjectId(id))), HttpStatus.OK);
     }
 
     /**
@@ -61,12 +50,7 @@ public class StorageController {
      */
     @PostMapping
     private ResponseEntity<StorageDTO> addStorage(@RequestBody Storage storage) {
-        try {
-            Storage addedStorage = storageService.addStorage((storage));
-            return new ResponseEntity<>(StorageMapper.storageToStorageDTO(addedStorage), HttpStatus.OK);
-        } catch (Exception e) {
-            throw new Error("Error while adding a new storage: " + e.getMessage(), e);
-        }
+        return new ResponseEntity<>(StorageMapper.storageToStorageDTO(storageService.addStorage(storage)), HttpStatus.OK);
     }
 
     /**
@@ -76,12 +60,7 @@ public class StorageController {
      */
     @PutMapping
     private ResponseEntity<StorageDTO> editStorage(@RequestBody StorageDTO storage) {
-        try {
-            Storage editedStorage = storageService.editStorage(StorageMapper.storageDTOtoStorage(storage));
-            return new ResponseEntity<>(StorageMapper.storageToStorageDTO(editedStorage), HttpStatus.OK);
-        } catch (Exception e) {
-            throw new Error("Error while adding a new storage", e);
-        }
+            return new ResponseEntity<>(StorageMapper.storageToStorageDTO(storageService.editStorage(StorageMapper.storageDTOtoStorage(storage))), HttpStatus.OK);
     }
 
     /**
@@ -91,12 +70,8 @@ public class StorageController {
      */
     @DeleteMapping("/{id}")
     private ResponseEntity<String> deleteStorage(@PathVariable String id) {
-        try {
-            storageService.deleteStorage(new ObjectId(id));
-            return new ResponseEntity<>("Storage deleted", HttpStatus.OK);
-        } catch (Exception e) {
-            throw new Error("Exception while deleting Storage", e);
-        }
+        storageService.deleteStorage(new ObjectId(id));
+        return new ResponseEntity<>("Storage deleted", HttpStatus.OK);
     }
 
 }

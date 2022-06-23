@@ -1,6 +1,7 @@
 package fr.iut.cctweaked.service;
 
 import fr.iut.cctweaked.domain.Site;
+import fr.iut.cctweaked.exception.NotFoundException;
 import fr.iut.cctweaked.repository.SiteRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;

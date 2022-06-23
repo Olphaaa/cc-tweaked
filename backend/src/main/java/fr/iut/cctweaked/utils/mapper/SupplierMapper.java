@@ -11,6 +11,11 @@ import java.util.List;
 
 public class SupplierMapper {
 
+    /**
+     * Convert a supplier to a supplierDTO
+     * @param supplierDTO SupplierDTO to convert
+     * @return SupplierDTO
+     */
     public static Supplier supplierDTOToSupplier(SupplierDTO supplierDTO) {
         Supplier supplier = new Supplier();
         if (supplierDTO.get_id() != null) {
@@ -23,6 +28,11 @@ public class SupplierMapper {
         return supplier;
     }
 
+    /**
+     * Convert a supplier to a supplierDTO
+     * @param supplier Supplier to convert
+     * @return SupplierDTO
+     */
     public static SupplierDTO supplierToSupplierDTO(Supplier supplier) {
         SupplierDTO supplierDTO = new SupplierDTO();
         supplierDTO.set_id(supplier.get_id().toString())
@@ -33,6 +43,11 @@ public class SupplierMapper {
         return supplierDTO;
     }
 
+    /**
+     * Convert a list of suppliers to a list of supplierDTO
+     * @param supplierList List of suppliers to convert
+     * @return List of supplierDTO
+     */
     public static List<SupplierDTO> supplierListToSupplierDTOList(List<Supplier> supplierList) {
         List<SupplierDTO> supplierDTOList = new ArrayList<>();
         for (Supplier supplier : supplierList) {

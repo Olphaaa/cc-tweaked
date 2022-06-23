@@ -5,7 +5,6 @@ import fr.iut.cctweaked.domain.Location;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.bson.types.ObjectId;
 
 import java.io.Serializable;
 

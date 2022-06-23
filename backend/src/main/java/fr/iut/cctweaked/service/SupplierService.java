@@ -33,8 +33,7 @@ public class SupplierService {
      * @return Added Supplier
      */
     public Supplier addSupplier(Supplier supplier) {
-        supplierRepository.findById(supplier.get_id()).orElseThrow(() -> new AlreadyExistingException("Supplier already exists"));
-        return supplierRepository.save(supplier);
+       return supplierRepository.save(supplier);
     }
 
     /**

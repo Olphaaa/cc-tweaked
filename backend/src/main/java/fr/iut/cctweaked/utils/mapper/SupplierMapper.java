@@ -41,4 +41,12 @@ public class SupplierMapper {
         return supplierDTOList;
     }
 
+    public static List<Supplier> supplierDTOListToSupplierList(List<SupplierDTO> supplierDTOList) {
+        List<Supplier> supplierList = new ArrayList<>();
+        for (SupplierDTO supplierDTO : supplierDTOList) {
+            supplierList.add(supplierDTOToSupplier(supplierDTO));
+        }
+        return supplierList;
+    }
+
 }

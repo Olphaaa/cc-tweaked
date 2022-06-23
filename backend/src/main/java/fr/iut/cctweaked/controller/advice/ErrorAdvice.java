@@ -1,5 +1,6 @@
 package fr.iut.cctweaked.controller.advice;
 
+import fr.iut.cctweaked.exception.AlreadyExistingException;
 import fr.iut.cctweaked.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,4 +18,10 @@ public class ErrorAdvice {
          return e.getMessage();
     }
 
+    @ResponseBody
+    @ExceptionHandler(AlreadyExistingException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleAlreadyExistingException(AlreadyExistingException e){
+        return e.getMessage();
+    }
 }

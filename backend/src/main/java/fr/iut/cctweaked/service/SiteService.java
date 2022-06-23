@@ -1,6 +1,8 @@
 package fr.iut.cctweaked.service;
 
 import fr.iut.cctweaked.domain.Site;
+import fr.iut.cctweaked.domain.Storage;
+import fr.iut.cctweaked.exception.NotFoundException;
 import fr.iut.cctweaked.repository.SiteRepository;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,7 @@ public class SiteService {
     }
 
     public Site getById(ObjectId id) {
-        return siteRepository.findById(id).orElseThrow();
+        return siteRepository.findById(id).orElseThrow(() -> new NotFoundException("Site not found"));
     }
 
     public Site addSite(Site site) {
@@ -29,10 +31,11 @@ public class SiteService {
     }
 
     public Site updateSite(Site site) {
+        siteRepository.findById(site.get_id()).orElseThrow(() -> new NotFoundException("Site not found"));
         return siteRepository.save(site);
     }
 
-    public void deleteSite(Site site) {
-        siteRepository.delete(site);
+    public void deleteSite(ObjectId _id) {
+        siteRepository.delete(siteRepository.findById(_id).orElseThrow(() -> new NotFoundException("Site not found")));
     }
 }

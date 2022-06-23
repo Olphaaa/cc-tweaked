@@ -1,11 +1,10 @@
 package fr.iut.cctweaked.service;
 
 import fr.iut.cctweaked.domain.User;
+import fr.iut.cctweaked.dto.UserSitesDTO;
 import fr.iut.cctweaked.dto.UsersSuppliersAndStorages;
 import fr.iut.cctweaked.repository.SiteRepository;
 import fr.iut.cctweaked.repository.UserRepository;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -70,22 +69,23 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
-    public UsersSuppliersAndStorages getSuppliersAndStorages(String id) {
+    public List<UsersSuppliersAndStorages> getSuppliersAndStorages(String id) {
         try {
-            List<Object> usersSuppliersAndStorages = siteRepository.findSuppliersAndStorages(id).getMappedResults();
+            var usersSuppliersAndStorages = siteRepository.findSuppliersAndStorages(id).getMappedResults();
             System.out.println(usersSuppliersAndStorages);
             return null;
+//            return usersSuppliersAndStorages;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    public List<String> getUsersSites(String id) {
+    public List<UserSitesDTO> getUsersSites(String id) {
         try {
-            List<Object> truc = siteRepository.findUsersSites(id).getMappedResults();
-            System.out.println(truc);
+            var usersSites = siteRepository.findUsersSites(id).getMappedResults();
+            System.out.println(usersSites);
             return null;
+//            return usersSites;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

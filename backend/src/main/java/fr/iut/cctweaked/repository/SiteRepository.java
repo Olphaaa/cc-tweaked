@@ -9,22 +9,24 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SiteRepository extends MongoRepository<Site, ObjectId> {
+    @Aggregation({
+            "{ $match: { 'owner.$id': ?0 }}",
+            "{ $lookup: { from: 'users', let: { userId: '$owner.$id' }, pipeline: [ { $match: { $expr: { $eq: [ '$_id', '$$userId' ] } } } ], as: 'owner' }}",
+            "{ $unwind: { path: '$owner' }}"
+    })
+    AggregationResults<Object> findUsersSites(String id);
 
     @Aggregation(
             {
                     "{$lookup: {from: 'users',let: { userId: '$owner.$id' },pipeline: [{ $match: { $expr: { $eq: ['$_id', '$$userId'] } } },],as: 'owner'}}",
-                    "{$match: {'owner._id': { $eq: 'f4411437-c65d-45d0-bca6-5a9c7565115d' }}}",
+                    "{ $unwind: { path: '$owner' }}",
+                    "{$match: {'owner._id': { $eq: ?0 }}}",
                     "{$lookup: {from: 'storages',let: { siteId: '$_id' },pipeline: [{ $match: { $expr: { $eq: ['$site.$id', '$$siteId'] } } },{$unset : ['site']}],as: 'storages'}}",
                     "{$lookup: {from: 'suppliers',let: { siteId: '$_id' },pipeline: [{ $match: { $expr: { $eq: ['$site.$id', '$$siteId'] } } },{$unset : ['site']}],as: 'suppliers'}}",
                     "{$group: {_id: '$owner._id',owner: { $first: '$owner' },sites: { $push: '$$ROOT' }}}",
-                    "{$unset : ['sites.owner', '_id']}"
+                    "{$unset : ['sites.owner', '_id']}",
             }
     )
     AggregationResults<Object> findSuppliersAndStorages(String id);
 
-    @Aggregation({
-            "{$lookup: {from: 'users',let: { userId: '$owner.$id' },pipeline: [{ $match: { $expr: { $eq: ['$_id', '$$userId'] } } },],as: 'owner'}}",
-            "{$match: {'owner._id': { $eq: 'f4411437-c65d-45d0-bca6-5a9c7565115d' }}}"
-    })
-    AggregationResults<Object> findUsersSites(String id);
 }

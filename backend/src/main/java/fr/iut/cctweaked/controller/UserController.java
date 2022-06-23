@@ -2,6 +2,7 @@ package fr.iut.cctweaked.controller;
 
 import fr.iut.cctweaked.config.SpringFoxConfig;
 import fr.iut.cctweaked.domain.User;
+import fr.iut.cctweaked.dto.UserSitesDTO;
 import fr.iut.cctweaked.dto.UsersSuppliersAndStorages;
 import fr.iut.cctweaked.service.UserService;
 import io.swagger.annotations.Api;
@@ -85,8 +86,8 @@ public class UserController {
      * @return User's suppliers and storages
      */
     @GetMapping("/{id}/sites/expanded")
-    public ResponseEntity<UsersSuppliersAndStorages> getSuppliersAndStorages(@PathVariable("id") String id) {
-        UsersSuppliersAndStorages usersSuppliersAndStorages = userService.getSuppliersAndStorages(id);
+    public ResponseEntity<List<UsersSuppliersAndStorages>> getSuppliersAndStorages(@PathVariable("id") String id) {
+        List<UsersSuppliersAndStorages> usersSuppliersAndStorages = userService.getSuppliersAndStorages(id);
         return new ResponseEntity<>(usersSuppliersAndStorages, HttpStatus.OK);
     }
 
@@ -96,8 +97,8 @@ public class UserController {
      * @return User's sites
      */
     @GetMapping("/{id}/sites")
-    public ResponseEntity<List<String>> getSites(@PathVariable("id") String id) {
-        List<String> sites = userService.getUsersSites(id);
+    public ResponseEntity<List<UserSitesDTO>> getSites(@PathVariable("id") String id) {
+        List<UserSitesDTO> sites = userService.getUsersSites(id);
         return new ResponseEntity<>(sites, HttpStatus.OK);
     }
 }

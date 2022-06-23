@@ -14,6 +14,6 @@ import java.util.List;
 public class SiteDetailsDTO {
     private String _id;
     private String name;
-    private List<StorageDTO> storageDTOs;
-    private List<SupplierDTO> supplierDTOs;
+    private List<StorageDTO> storages;
+    private List<SupplierDTO> suppliers;
 }

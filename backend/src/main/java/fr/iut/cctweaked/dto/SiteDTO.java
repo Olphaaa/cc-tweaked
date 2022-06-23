@@ -18,6 +18,6 @@ public class SiteDTO {
     private String _id;
     private String name;
     private User owner;
-    private List<SupplierDTO> supplierDTOs;
-    private List<StorageDTO> storageDTOs;
+    private List<SupplierDTO> suppliers;
+    private List<StorageDTO> storages;
 }

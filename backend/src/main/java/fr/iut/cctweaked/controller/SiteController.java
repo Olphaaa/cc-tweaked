@@ -35,14 +35,15 @@ public class SiteController {
     }
 
     @PostMapping
-    public ResponseEntity<Site> addSite(@RequestBody SiteDTO siteDTO){
-        return new ResponseEntity<>(siteService.addSite(SiteMapper.siteDTOtoSite(siteDTO)) ,HttpStatus.CREATED);
+    public ResponseEntity<SiteDTO> addSite(@RequestBody SiteDTO siteDTO){
+        Site site = siteService.addSite(SiteMapper.siteDTOtoSite(siteDTO));
+        return new ResponseEntity<>(SiteMapper.siteToSiteDTO(site), HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<Site> updateSite(@RequestBody Site site){
+    public ResponseEntity<SiteDTO> updateSite(@RequestBody Site site){
         Site updatedSite = siteService.updateSite(site);
-        return new ResponseEntity<>(updatedSite, HttpStatus.OK);
+        return new ResponseEntity<>(SiteMapper.siteToSiteDTO(updatedSite), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

@@ -36,4 +36,12 @@ public class StorageMapper {
         }
         return storageDTOList;
     }
+
+    public static List<Storage> storageDTOListToStorageList(List<StorageDTO> storageDTOList) {
+        List<Storage> storageList = new java.util.ArrayList<>();
+        for (StorageDTO storageDTO : storageDTOList) {
+            storageList.add(storageDTOtoStorage(storageDTO));
+        }
+        return storageList;
+    }
 }

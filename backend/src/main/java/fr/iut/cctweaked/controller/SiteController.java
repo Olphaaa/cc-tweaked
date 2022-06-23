@@ -36,13 +36,18 @@ public class SiteController {
 
     @PostMapping
     public ResponseEntity<Site> addSite(@RequestBody SiteDTO siteDTO){
-//        return siteService.addSite(site);
         return new ResponseEntity<>(siteService.addSite(SiteMapper.siteDTOtoSite(siteDTO)) ,HttpStatus.CREATED);
     }
 
     @PutMapping
     public ResponseEntity<Site> updateSite(@RequestBody Site site){
-//        return siteService.updateSite(site);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Site updatedSite = siteService.updateSite(site);
+        return new ResponseEntity<>(updatedSite, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteSite(@PathVariable("id") String id){
+        siteService.deleteSite(new ObjectId(id));
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -35,7 +35,7 @@ public class StorageController {
             return new ResponseEntity<>(StorageMapper.storageListToStorageDTOList(storages), HttpStatus.OK);
         } catch (Exception e) {
             // TODO: change Error to a custom error
-            throw new Error("Error while getting all storages", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Error while getting all storages", e);
         }
     }
 
@@ -50,7 +50,7 @@ public class StorageController {
             Storage storage = storageService.getStorage(new ObjectId(id));
             return new ResponseEntity<>(StorageMapper.storageToStorageDTO(storage), HttpStatus.OK);
         } catch (Exception e) {
-            throw new Error("Error while getting one storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Error while getting one storage", e);
         }
     }
 
@@ -65,7 +65,7 @@ public class StorageController {
             Storage addedStorage = storageService.addStorage((storage));
             return new ResponseEntity<>(StorageMapper.storageToStorageDTO(addedStorage), HttpStatus.OK);
         } catch (Exception e) {
-            throw new Error("Error while adding a new storage: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Error while adding a new storage: " + e.getMessage(), e);
         }
     }
 
@@ -80,7 +80,7 @@ public class StorageController {
             Storage editedStorage = storageService.editStorage(StorageMapper.storageDTOtoStorage(storage));
             return new ResponseEntity<>(StorageMapper.storageToStorageDTO(editedStorage), HttpStatus.OK);
         } catch (Exception e) {
-            throw new Error("Error while adding a new storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Error while adding a new storage", e);
         }
     }
 
@@ -95,7 +95,7 @@ public class StorageController {
             storageService.deleteStorage(new ObjectId(id));
             return new ResponseEntity<>("Storage deleted", HttpStatus.OK);
         } catch (Exception e) {
-            throw new Error("Exception while deleting Storage", HttpStatus.INTERNAL_SERVER_ERROR, e);
+            throw new Error("Exception while deleting Storage", e);
         }
     }
 

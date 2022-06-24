@@ -42,3 +42,71 @@ Les controllers peuvent toute faire les méthode du CRUD, c'est a dire, pour cha
 |      |      |      |
 |      |      |      |
 |      |      |      |
+
+## Diagramme MCD
+![Diagramme de classes](./mcd.svg)
+
+## Diagramme de classes
+
+
+```mermaid
+ classDiagram
+    Supplier o-- SupplierType
+    Supplier o-- SupplierState
+    Site *-- User
+    Site *-- Storage
+    Site *-- Supplier
+    Supplier o-- IOPort
+    Supplier o-- SupplierState
+    Supplier o-- SupplierType
+    Storage o-- IOPort
+    Storage o-- Location
+    IOPort o-- IOPortState
+      
+    class Supplier {
+          ObjectID _id
+          SupplierType type
+          Location location
+          Status boolean
+      }
+    class User {
+            String id
+            String usernamep
+      }
+    class Location {
+        Double x
+        Double y
+        Double z
+        String world
+    }
+    class Site {
+        ObjectID _id
+        String name
+    }
+    class SupplierType {
+        <<enumeration>>
+        SOLAR
+        NUCLEAR
+        WIND
+    }
+    class SupplierState {
+        <<enumeration>>
+        ON
+        PAUSE
+        OFF
+    }
+    class IOPortState {
+        <<enumeration>>
+        ON
+        OFF
+    }
+    class IOPort {
+        ObjectID _id
+        Long transfert_rate
+        Long max_transfer_rate
+    }
+    class Storage {
+        ObjectID _id
+        Long capacity
+    }
+```

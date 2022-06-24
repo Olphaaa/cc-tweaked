@@ -85,9 +85,9 @@ public class UserService {
         }
     }
 
-    public List<UserSitesDTO> getUsersSites(String id) {
+    public List<Object> getUsersSites(String id) {
         try {
-            List<UserSitesDTO> userSitesDTOS = siteRepository.findUsersSites(id).getMappedResults();
+            List<Object> userSitesDTOS = siteRepository.findUsersSites(id).getMappedResults();
             return userSitesDTOS;
         } catch (Exception e) {
             throw new RuntimeException(e);

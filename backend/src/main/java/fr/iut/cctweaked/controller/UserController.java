@@ -97,8 +97,8 @@ public class UserController {
      * @return User's sites
      */
     @GetMapping("/{id}/sites")
-    public ResponseEntity<List<UserSitesDTO>> getSites(@PathVariable("id") String id) {
-        List<UserSitesDTO> sites = userService.getUsersSites(id);
+    public ResponseEntity<List<Object>> getSites(@PathVariable("id") String id) {
+        List<Object> sites = userService.getUsersSites(id);
         return new ResponseEntity<>(sites, HttpStatus.OK);
     }
 }

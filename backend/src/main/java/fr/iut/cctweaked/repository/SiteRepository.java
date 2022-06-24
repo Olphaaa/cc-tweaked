@@ -15,7 +15,7 @@ public interface SiteRepository extends MongoRepository<Site, ObjectId> {
             "{ $lookup: { from: 'users', let: { userId: '$owner.$id' }, pipeline: [ { $match: { $expr: { $eq: [ '$_id', '$$userId' ] } } } ], as: 'owner' }}",
             "{ $unwind: { path: '$owner' }}"
     })
-    AggregationResults<UserSitesDTO> findUsersSites(String id);
+    AggregationResults<Object> findUsersSites(String id);
 
     /* Fonctionne sur MongoDB compass, mais pas avec Spring Boot 😉 (ON PLEURE)*/
 //    @Aggregation({

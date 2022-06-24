@@ -1,5 +1,6 @@
 package fr.iut.cctweaked.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.iut.cctweaked.domain.User;
 import fr.iut.cctweaked.dto.UserSitesDTO;
 import fr.iut.cctweaked.dto.UsersSuppliersAndStorages;
@@ -14,7 +15,7 @@ import java.util.NoSuchElementException;
 public class UserService {
 
     private final UserRepository userRepository;
-    private SiteRepository siteRepository;
+    private final SiteRepository siteRepository;
 
     public UserService(UserRepository userRepository, SiteRepository siteRepository) {
         this.userRepository = userRepository;
@@ -69,9 +70,15 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
-    public List<UsersSuppliersAndStorages> getSuppliersAndStorages(String id) {
+    /**
+     * Get a user Id and his sites
+     * @param id User username Id
+     * @throws NoSuchElementException if user not found
+     * @return UserSitesDTO
+     */
+    public List<UsersSuppliersAndStorages> getUsersSitesExpanded(String id) {
         try {
-            var usersSuppliersAndStorages = siteRepository.findSuppliersAndStorages(id).getMappedResults();
+            var usersSuppliersAndStorages = userRepository.findSuppliersAndStorages(id).getMappedResults();
             System.out.println(usersSuppliersAndStorages);
             return null;
 //            return usersSuppliersAndStorages;
@@ -80,10 +87,20 @@ public class UserService {
         }
     }
 
+    /**
+     * Get a user Id and his sites
+     * @param id User username Id
+     * @throws NoSuchElementException if user not found
+     * @return UserSitesDTO
+     */
     public List<UserSitesDTO> getUsersSites(String id) {
         try {
             var usersSites = siteRepository.findUsersSites(id).getMappedResults();
-            System.out.println(usersSites);
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            String carAsString = objectMapper.writeValueAsString(usersSites);
+
+            System.out.println(carAsString);
             return null;
 //            return usersSites;
         } catch (Exception e) {

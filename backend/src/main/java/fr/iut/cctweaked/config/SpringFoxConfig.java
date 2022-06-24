@@ -23,12 +23,12 @@ public class SpringFoxConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("fr.iut.cctweaked"))
+                .apis(RequestHandlerSelectors.basePackage("fr.iut.cctweaked.controller"))
                 .paths(PathSelectors.any())
                 .build()
                 .tags(new Tag(SUPPLIER_TAG, "Supplier endpoints documentation"))
                 .tags(new Tag(STORAGE_TAG, "Storage endpoints documentation"))
-                .tags(new Tag(SITE_TAG, "Site endpoints documentation"))
+//                .tags(new Tag(SITE_TAG, "Site endpoints documentation"))
                 .tags(new Tag(USER_TAG, "User endpoints documentation"));
     }
 }

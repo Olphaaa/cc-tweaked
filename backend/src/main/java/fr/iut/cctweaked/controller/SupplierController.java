@@ -29,7 +29,7 @@ public class SupplierController {
      * @return List of suppliers
      */
     @GetMapping
-    public ResponseEntity<List<SupplierDTO>> getSuppliers() {
+    public ResponseEntity<List<SupplierDTO>> getAll() {
         return new ResponseEntity<>(SupplierMapper.supplierListToSupplierDTOList(supplierService.getAll()), HttpStatus.OK);
     }
 
@@ -39,7 +39,7 @@ public class SupplierController {
      * @return Supplier
      */
     @GetMapping("/{id}")
-    public ResponseEntity<SupplierDTO> getSupplier(@PathVariable String id) {
+    public ResponseEntity<SupplierDTO> getOne(@PathVariable String id) {
         return new ResponseEntity<>(SupplierMapper.supplierToSupplierDTO(supplierService.getSupplier(new ObjectId(id))), HttpStatus.OK);
     }
 

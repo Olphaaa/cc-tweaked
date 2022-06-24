@@ -81,24 +81,26 @@ public class UserController {
     }
 
     /**
-     * Get user's suppliers and storages
+     * Get user's sites
+     *
      * @param id User id
      * @return User's suppliers and storages
      */
     @GetMapping("/{id}/sites/expanded")
-    public ResponseEntity<List<UsersSuppliersAndStorages>> getSuppliersAndStorages(@PathVariable("id") String id) {
-        List<UsersSuppliersAndStorages> usersSuppliersAndStorages = userService.getSuppliersAndStorages(id);
-        return new ResponseEntity<>(usersSuppliersAndStorages, HttpStatus.OK);
+    public ResponseEntity<List<UsersSuppliersAndStorages>> getUsersSitesExpanded(@PathVariable("id") String id) {
+        List<UsersSuppliersAndStorages> usersSitesExpanded = userService.getUsersSitesExpanded(id);
+        return new ResponseEntity<>(usersSitesExpanded, HttpStatus.OK);
     }
 
     /**
-     * Get user's sites
+     * Get user's sites expanded version
+     *
      * @param id User id
      * @return User's sites
      */
     @GetMapping("/{id}/sites")
-    public ResponseEntity<List<UserSitesDTO>> getSites(@PathVariable("id") String id) {
-        List<UserSitesDTO> sites = userService.getUsersSites(id);
-        return new ResponseEntity<>(sites, HttpStatus.OK);
+    public ResponseEntity<List<UserSitesDTO>> getUsersSites(@PathVariable("id") String id) {
+        List<UserSitesDTO> usersSites = userService.getUsersSites(id);
+        return new ResponseEntity<>(usersSites, HttpStatus.OK);
     }
 }

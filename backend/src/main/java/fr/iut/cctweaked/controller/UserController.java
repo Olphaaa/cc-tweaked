@@ -3,7 +3,7 @@ package fr.iut.cctweaked.controller;
 import fr.iut.cctweaked.config.SpringFoxConfig;
 import fr.iut.cctweaked.domain.User;
 import fr.iut.cctweaked.dto.UserSitesDTO;
-import fr.iut.cctweaked.dto.UsersSuppliersAndStorages;
+import fr.iut.cctweaked.dto.UserSitesExpandedDTO;
 import fr.iut.cctweaked.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
@@ -81,26 +81,24 @@ public class UserController {
     }
 
     /**
-     * Get user's sites
-     *
+     * Get user's suppliers and storages
      * @param id User id
      * @return User's suppliers and storages
      */
     @GetMapping("/{id}/sites/expanded")
-    public ResponseEntity<List<UsersSuppliersAndStorages>> getUsersSitesExpanded(@PathVariable("id") String id) {
-        List<UsersSuppliersAndStorages> usersSitesExpanded = userService.getUsersSitesExpanded(id);
-        return new ResponseEntity<>(usersSitesExpanded, HttpStatus.OK);
+    public ResponseEntity<List<UserSitesExpandedDTO>> getSuppliersAndStorages(@PathVariable("id") String id) {
+        List<UserSitesExpandedDTO> usersSuppliersAndStorages = userService.getUserSitesExpanded(id);
+        return new ResponseEntity<>(usersSuppliersAndStorages, HttpStatus.OK);
     }
 
     /**
-     * Get user's sites expanded version
-     *
+     * Get user's sites
      * @param id User id
      * @return User's sites
      */
     @GetMapping("/{id}/sites")
-    public ResponseEntity<List<UserSitesDTO>> getUsersSites(@PathVariable("id") String id) {
-        List<UserSitesDTO> usersSites = userService.getUsersSites(id);
-        return new ResponseEntity<>(usersSites, HttpStatus.OK);
+    public ResponseEntity<List<UserSitesDTO>> getSites(@PathVariable("id") String id) {
+        List<UserSitesDTO> sites = userService.getUsersSites(id);
+        return new ResponseEntity<>(sites, HttpStatus.OK);
     }
 }

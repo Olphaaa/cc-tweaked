@@ -1,13 +1,13 @@
 package fr.iut.cctweaked.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.iut.cctweaked.domain.User;
+import fr.iut.cctweaked.dto.UserSitesExpandedDTO;
 import fr.iut.cctweaked.dto.UserSitesDTO;
-import fr.iut.cctweaked.dto.UsersSuppliersAndStorages;
 import fr.iut.cctweaked.repository.SiteRepository;
 import fr.iut.cctweaked.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final SiteRepository siteRepository;
+    private SiteRepository siteRepository;
 
     public UserService(UserRepository userRepository, SiteRepository siteRepository) {
         this.userRepository = userRepository;
@@ -24,6 +24,7 @@ public class UserService {
 
     /**
      * Get all users
+     *
      * @return List of users
      */
     public List<User> getAll() {
@@ -32,6 +33,7 @@ public class UserService {
 
     /**
      * Add a user
+     *
      * @param user User to add
      * @return Added user
      */
@@ -42,15 +44,17 @@ public class UserService {
 
     /**
      * Delete a user
+     *
      * @param id User id
      */
     public void deleteUser(String id) {
         User user = userRepository.findById(id).orElseThrow();
         userRepository.delete(user);
-     }
+    }
 
     /**
      * Edit a user
+     *
      * @param user User to edit
      * @return Edited user
      * @throws NoSuchElementException if user not found
@@ -63,6 +67,7 @@ public class UserService {
 
     /**
      * Get a user by id
+     *
      * @param id User id
      * @throws NoSuchElementException if user not found
      */
@@ -70,39 +75,20 @@ public class UserService {
         return userRepository.findById(id).orElseThrow();
     }
 
-    /**
-     * Get a user Id and his sites
-     * @param id User username Id
-     * @throws NoSuchElementException if user not found
-     * @return UserSitesDTO
-     */
-    public List<UsersSuppliersAndStorages> getUsersSitesExpanded(String id) {
+    public List<UserSitesExpandedDTO> getUserSitesExpanded(String id) {
         try {
-            var usersSuppliersAndStorages = userRepository.findSuppliersAndStorages(id).getMappedResults();
-            System.out.println(usersSuppliersAndStorages);
-            return null;
-//            return usersSuppliersAndStorages;
+            List<UserSitesExpandedDTO> userSitesExpandedDTOS = new ArrayList<>();
+//            List<UserSitesExpandedDTO> userSitesExpandedDTOS = siteRepository.findSuppliersAndStorages(id).getMappedResults();
+            return userSitesExpandedDTOS;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
-    /**
-     * Get a user Id and his sites
-     * @param id User username Id
-     * @throws NoSuchElementException if user not found
-     * @return UserSitesDTO
-     */
     public List<UserSitesDTO> getUsersSites(String id) {
         try {
-            var usersSites = siteRepository.findUsersSites(id).getMappedResults();
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            String carAsString = objectMapper.writeValueAsString(usersSites);
-
-            System.out.println(carAsString);
-            return null;
-//            return usersSites;
+            List<UserSitesDTO> userSitesDTOS = siteRepository.findUsersSites(id).getMappedResults();
+            return userSitesDTOS;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

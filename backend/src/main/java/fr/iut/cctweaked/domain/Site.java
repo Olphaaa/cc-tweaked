@@ -1,10 +1,7 @@
 package fr.iut.cctweaked.domain;
 
-import fr.iut.cctweaked.domain.Supplier;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -28,4 +25,5 @@ public class Site {
 
     @DBRef
     private List<Storage> storages;
+    
 }

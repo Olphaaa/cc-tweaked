@@ -3,7 +3,7 @@ package fr.iut.cctweaked.controller;
 import fr.iut.cctweaked.config.SpringFoxConfig;
 import fr.iut.cctweaked.domain.User;
 import fr.iut.cctweaked.dto.UserSitesDTO;
-import fr.iut.cctweaked.dto.UsersSuppliersAndStorages;
+import fr.iut.cctweaked.dto.UserSitesExpandedDTO;
 import fr.iut.cctweaked.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
@@ -86,8 +86,8 @@ public class UserController {
      * @return User's suppliers and storages
      */
     @GetMapping("/{id}/sites/expanded")
-    public ResponseEntity<List<UsersSuppliersAndStorages>> getSuppliersAndStorages(@PathVariable("id") String id) {
-        List<UsersSuppliersAndStorages> usersSuppliersAndStorages = userService.getSuppliersAndStorages(id);
+    public ResponseEntity<List<UserSitesExpandedDTO>> getSuppliersAndStorages(@PathVariable("id") String id) {
+        List<UserSitesExpandedDTO> usersSuppliersAndStorages = userService.getUserSitesExpanded(id);
         return new ResponseEntity<>(usersSuppliersAndStorages, HttpStatus.OK);
     }
 

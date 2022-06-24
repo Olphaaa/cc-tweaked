@@ -1,7 +1,5 @@
 package fr.iut.cctweaked.dto;
 
-import fr.iut.cctweaked.domain.Storage;
-import fr.iut.cctweaked.domain.Supplier;
 import fr.iut.cctweaked.domain.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

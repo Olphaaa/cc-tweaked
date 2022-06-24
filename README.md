@@ -11,6 +11,10 @@ De plus, une Javadoc a été généré et vous pouvez la consulter depuis le ré
 
 Les controllers peuvent toute faire les méthode du CRUD, c'est a dire, pour chaque modules , l'api permet d'**obtenir une liste d'entitée**, **obtenir une seule entitée**, **ajouter**, **modifier** ou **supprimer**
 
+Les identifiants de connexion sont:  
+user: "tweaked",  
+pwd: "clientserver-cctweaked-mongodb",  
+mongodb://tweaked@fingarde.sunei.fr:27017/?authMechanism=DEFAULT  
 
 ### Partie User
 
